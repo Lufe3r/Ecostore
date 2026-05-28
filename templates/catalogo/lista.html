@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Nosso Catálogo</h2>
+<div class="grid">
+    {% for produto in produtos_locais %}
+    <div class="card">
+        <h4>{{ produto.nome }}</h4>
+
+        {% if produto.imagem %}
+            <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}" style="width: 100px; height: 100px; object-fit: contain;">
+        {% endif %}
+
+        <p>{{ produto.descricao|truncatewords:10 }}</p>
+        <p><strong>R$ {{ produto.preco }}</strong></p>
+        <p>Estoque: {{ produto.estoque }}</p>
+
+        {% if user.is_authenticated %}
+            <form action="{% url 'realizar_compra' produto.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Comprar</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn btn-secondary">Faça login para comprar</a>
+        {% endif %}
+    </div>
+    {% empty %}
+    <p>Nenhum produto local cadastrado.</p>
+    {% endfor %}
+</div>
+
+<h2 style="margin-top: 3rem;">Produtos Parceiros</h2>
+<div class="grid">
+    {% for item in produtos_api %}
+    <div class="card">
+        <img src="{{ item.image }}" alt="{{ item.title }}" style="width: 100px; height: 100px; object-fit: contain;">
+        <h4>{{ item.title }}</h4>
+        <p><strong>$ {{ item.price }}</strong></p>
+        <button class="btn btn-secondary" disabled>Indisponível</button>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

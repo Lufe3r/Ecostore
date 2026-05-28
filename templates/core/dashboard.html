@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Dashboard Administrativo</h2>
+
+<div class="dashboard-grid">
+
+    <div class="card">
+        <h3>Usuários</h3>
+        <p>{{ stats.usuarios }}</p>
+        <a href="{% url 'usuarios_admin' %}">Gerenciar</a>
+</a>
+    </div>
+
+    <div class="card">
+        <h3>Produtos</h3>
+        <p>{{ stats.produtos }}</p>
+        <a href="{% url 'produtos_admin' %}">Gerenciar</a>
+    </div>
+
+    <div class="card">
+    <h3>Categorias</h3>
+    <p>{{ stats.categorias }}</p>
+    <a href="{% url 'categorias' %}">Gerenciar</a>
+</div>
+
+<div class="card">
+    <h3>Vendas</h3>
+    <p>{{ stats.vendas }}</p>
+    <a href="{% url 'compras' %}">Gerenciar</a>
+</div>
+
+    <div class="card">
+    <h3>Contatos</h3>
+    <p>{{ stats.contatos }}</p>
+    <a href="{% url 'contatos_admin' %}">Gerenciar</a>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Meu Perfil</h2>
+<div class="card">
+    <p><strong>Usuário:</strong> {{ user.username }}</p>
+    <p><strong>E-mail:</strong> {{ user.email }}</p>
+    <a href="{% url 'alterar_senha' %}" class="btn btn-primary">Alterar Senha</a>
+</div>
+
+<h3 style="margin-top: 2rem;">Histórico de Pedidos</h3>
+{% if pedidos %}
+    <table style="width:100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        <thead style="background: #eee;">
+            <tr>
+                <th style="padding: 1rem; text-align: left;">Produto</th>
+                <th style="padding: 1rem; text-align: left;">Quantidade</th>
+                <th style="padding: 1rem; text-align: left;">Total</th>
+                <th style="padding: 1rem; text-align: left;">Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pedido in pedidos %}
+            <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 1rem;">{{ pedido.produto.nome }}</td>
+                <td style="padding: 1rem;">{{ pedido.quantidade }}</td>
+                <td style="padding: 1rem;">R$ {{ pedido.valor_total }}</td>
+                <td style="padding: 1rem;">{{ pedido.data_pedido|date:"d/m/Y H:i" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Você ainda não realizou nenhum pedido.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Avaliações</h2>
+
+<table style="width:100%; border-collapse: collapse; background:white;">
+    <thead style="background:#eee;">
+        <tr>
+            <th style="padding:10px;">Usuário</th>
+            <th style="padding:10px;">Comentário</th>
+            <th style="padding:10px;">Nota</th>
+            <th style="padding:10px;">Data</th>
+            <th style="padding:10px;">Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for avaliacao in avaliacoes %}
+        <tr style="border-bottom:1px solid #ddd;">
+            <td style="padding:10px;">
+                {{ avaliacao.usuario.username }}
+            </td>
+
+            <td style="padding:10px;">
+                {{ avaliacao.comentario }}
+            </td>
+
+            <td style="padding:10px;">
+                {{ avaliacao.nota }}
+            </td>
+
+            <td style="padding:10px;">
+                {{ avaliacao.data|date:"d/m/Y H:i" }}
+            </td>
+
+            <td style="padding:10px;">
+                <a href="{% url 'excluir_avaliacao' avaliacao.id %}" class="btn btn-danger">
+                    Excluir
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Quem Somos</h2>
+<div class="card">
+    <p>A <strong>EcoStore</strong> nasceu da vontade de transformar o consumo em algo positivo para o planeta. Nossa missão é oferecer produtos de alta qualidade que respeitem o meio ambiente e promovam um estilo de vida sustentável.</p>
+    <p>Trabalhamos apenas com fornecedores certificados e materiais biodegradáveis ou reciclados.</p>
+</div>
+
+<h3>Nossa Equipe</h3>
+<div class="grid">
+    {% for dev in desenvolvedores %}
+    <div class="card text-center">
+        <h4>{{ dev.nome }}</h4>
+        <p>{{ dev.cargo }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+

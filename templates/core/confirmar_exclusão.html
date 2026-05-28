@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Confirmar Exclusão</h2>
+
+<div class="card">
+
+    <p>
+        Deseja realmente excluir:
+        <strong>{{ objeto }}</strong>?
+    </p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <button type="submit" class="btn btn-danger">
+            Excluir
+        </button>
+
+        <a href="{{ voltar }}" class="btn btn-primary">
+            Cancelar
+        </a>
+    </form>
+
+</div>
+
+{% endblock %}

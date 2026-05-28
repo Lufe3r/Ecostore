@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Fale Conosco</h2>
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+    <form method="post">
+        {% csrf_token %}
+        <div style="margin-bottom: 1rem;">
+            <label style="display:block; margin-bottom: 0.5rem;">Nome:</label>
+            <input type="text" name="nome" required style="width:100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <label style="display:block; margin-bottom: 0.5rem;">E-mail:</label>
+            <input type="email" name="email" required style="width:100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <label style="display:block; margin-bottom: 0.5rem;">Assunto:</label>
+            <input type="text" name="assunto" required style="width:100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <label style="display:block; margin-bottom: 0.5rem;">Mensagem:</label>
+            <textarea name="mensagem" rows="5" required style="width:100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Enviar Mensagem</button>
+    </form>
+</div>
+{% endblock %}

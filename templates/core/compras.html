@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Compras</h2>
+
+<table style="width:100%; border-collapse: collapse; background:white;">
+    <thead style="background:#eee;">
+        <tr>
+            <th style="padding:10px;">Cliente</th>
+            <th style="padding:10px;">Produto</th>
+            <th style="padding:10px;">Quantidade</th>
+            <th style="padding:10px;">Valor</th>
+            <th style="padding:10px;">Data</th>
+            <th style="padding:10px;">Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for compra in compras %}
+        <tr style="border-bottom:1px solid #ddd;">
+            <td style="padding:10px;">{{ compra.usuario.username }}</td>
+            <td style="padding:10px;">{{ compra.produto.nome }}</td>
+            <td style="padding:10px;">{{ compra.quantidade }}</td>
+            <td style="padding:10px;">R$ {{ compra.valor_total }}</td>
+            <td style="padding:10px;">
+                {{ compra.data_pedido|date:"d/m/Y H:i" }}
+            </td>
+
+            <td style="padding:10px;">
+                <a href="{% url 'excluir_compra' compra.id %}" class="btn btn-danger">
+                    Excluir
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

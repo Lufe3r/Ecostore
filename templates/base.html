@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}EcoStore{% endblock %}</title>
+    <style>
+        :root { --primary: #2d6a4f; --secondary: #40916c; --light: #f4f7f6; --dark: #1b4332; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var/(--light); }
+        header { background: var(--dark); color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        nav a { color: white; text-decoration: none; margin-left: 1rem; }
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; min-height: 70vh; }
+        .btn { padding: 0.5rem 1rem; border-radius: 4px; border: none; cursor: pointer; text-decoration: none; }
+        .btn-primary { background: var(--primary); color: white; }
+        .card { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 1rem; }
+        footer { background: var(--dark); color: white; text-align: center; padding: 1rem; margin-top: 2rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+        .alert { padding: 1rem; border-radius: 4px; margin-bottom: 1rem; }
+        .alert-success { background: #d4edda; color: #155724; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="margin:0;">EcoStore</h1>
+        <nav>
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'lista_produtos' %}">Produtos</a>
+            <a href="{% url 'quem_somos' %}">Sobre</a>
+            <a href="{% url 'fale_conosco' %}">Contato</a>
+            {% if user.is_authenticated %}
+                {% if user.is_staff %}
+                    <a href="{% url 'dashboard' %}">Dashboard</a>
+                {% else %}
+                    <a href="{% url 'perfil' %}">Perfil</a>
+                {% endif %}
+                <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="background:none; border:none; color:white; cursor:pointer;">Sair</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'cadastrar' %}">Cadastrar</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2026 EcoStore - Produtos Sustentáveis</p>
+    </footer>
+</body>
+</html>
